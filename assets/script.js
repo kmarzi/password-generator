@@ -40,7 +40,7 @@ function generatePassword() {
    console.log(randomArr, randomCharacterNum, randomCharacter)
    password =password + randomCharacter
     }
-console.log(password)
+
 return password
 }
 

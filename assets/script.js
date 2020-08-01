@@ -1,47 +1,64 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+var numberVal = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+var specialVal = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '+', '=']
 
-document.getElementById("generate").addEventListener("click", myFunction);
 
-function myFunction() {
-  confirm("Would you like to change your password?");
-  confirm("Do you want to use letters?")
-  confirm("Do you want to use numbers?")
-  confirm("Do you want to use symbols?")
+function generatePassword() {
+  console.log()
+  var userSelection = []
+  if (!confirm("Would you like to change your password?")) {
+    alert("Have a great day!")
+    return ''
+  }
+  var length = prompt("How long would you like your password to be?")
+  if (length < 8 || length > 128) {
+    alert("Passsword length must be atleast 8 characters and less than 128 characters.")
+     return ""
+  }
+  if (confirm("Do you want to use uppercase letters?")) {
+    userSelection.push(upperCase)
+  }
+  if (confirm("Do you want to use lowercase letters?")) {
+    userSelection.push(lowerCase)
+  }
+  if (confirm("Do you want to use numbers?")) {
+    userSelection.push(numberVal)
+  }
 
-  var passwordLength = confirm("Must contain atleast 8 characters.")
-    if (passwordLength < 8 || passwordLength > 128){
-      alert("password must be atleast 8 characters.")
-      passwordLength = 0
+  if(confirm("Do you want to use symbols?")) {
+    userSelection.push(specialVal)
+  }
+  
+  var password = ""
+ for(var i = 0; i < length; i++){
+   var randomArr = Math.floor(Math.random() * userSelection.length);
+   var randomCharacterNum = Math.floor(Math.random() * userSelection[randomArr].length);
+   var randomCharacter = userSelection[randomArr][randomCharacterNum]
+   console.log(randomArr, randomCharacterNum, randomCharacter)
+   password =password + randomCharacter
     }
+console.log(password)
+return password
 }
- 
+
+
 // Write password to the #password input
 function writePassword() {
+  console.log('test')
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 }
 
- var passswordCharacters
- 
 
- var lowerCase =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
- var upperCase =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
- var numberVal =['1','2','3','4','5','6','7','8','9','0']
- var specialVal =['~','!','@','#','$','%','^','&','*','+','=']
 
-   console.log(lowerCase, upperCase, numberVal, specialVal)
+//    console.log(lowerCase, upperCase, numberVal, specialVal)
 
- for(var i = 0; i < passwordLength; i++){
-   var randomUpper = Math.floor(Math.random() * lowerCase.length);
-   var randomLower = Math.floor(Math.random() * upperCase.length);
-   var randomNumber = Math.floor(Math.random() * numberVal.length);
-   var randomSpecial = Math.floor(Math.random() * specialVal.length);
-    }
- 
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("generate", writePassword);
+generateBtn.addEventListener("click", writePassword);
